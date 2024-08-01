@@ -1,0 +1,36 @@
+1. Start the Kafka environment:
+
+Apache Kafka can be started using ZooKeeper or KRaft. To get started with either configuration follow one of the sections below but not both.
+
+Kafka with ZooKeeper
+Run the following commands in order to start all services in the correct order:
+
+# Start the ZooKeeper service
+$ bin/zookeeper-server-start.sh config/zookeeper.properties
+
+Open another terminal session and run:
+
+# Start the Kafka broker service
+$ bin/kafka-server-start.sh config/server.properties
+Once all services have successfully launched, you will have a basic Kafka environment running and ready to use.
+
+2. Create a topic to store your events
+Kafka is a distributed event streaming platform that lets you read, write, store, and process events (also called records or messages in the documentation) across many machines.
+
+Example events are payment transactions, geolocation updates from mobile phones, shipping orders, sensor measurements from IoT devices or medical equipment, and much more. These events are organized and stored in topics. Very simplified, a topic is similar to a folder in a filesystem, and the events are the files in that folder.
+
+So before you can write your first events, you must create a topic. Open another terminal session and run:
+
+$ bin/kafka-topics.sh --create --topic quickstart-events --bootstrap-server localhost:9092
+
+3. Read the events
+Open another terminal session and run the console consumer client to read the events you just created:
+
+$ bin/kafka-console-consumer.sh --topic quickstart-events --from-beginning --bootstrap-server localhost:9092
+
+4. Terminate the Kafka environment
+Now that you reached the end of the quickstart, feel free to tear down the Kafka environment—or continue playing around.
+
+Stop the producer and consumer clients with Ctrl-C, if you haven't done so already.
+Stop the Kafka broker with Ctrl-C.
+Lastly, if the Kafka with ZooKeeper section was followed, stop the ZooKeeper server with Ctrl-C.
